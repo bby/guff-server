@@ -52,6 +52,7 @@ GEM
     do_postgres (0.10.8)
       data_objects (= 0.10.8)
     fastercsv (1.5.5)
+    httpclient (2.2.5)
     json (1.6.7)
     json_pure (1.6.7)
     multi_json (1.0.4)
@@ -72,4 +73,5 @@ PLATFORMS
 DEPENDENCIES
   data_mapper
   dm-postgres-adapter
+  httpclient
   sinatra

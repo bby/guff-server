@@ -26,7 +26,7 @@ class Message
   property :longitude, Float
   property :created_at, DateTime
   property :updated_at, DateTime
-  #property :token_id, String, :length => 250
+  property :token_id, String, :length => 250
 end
 
 # class Location

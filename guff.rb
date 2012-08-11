@@ -11,6 +11,7 @@ configure :development do
 end
 
 configure :production do
+  enable :logging, :dump_errors, :raise_errors
   DataMapper.setup :default, ENV['DATABASE_URL']
   set :protection, :except => :json_csrf
 end

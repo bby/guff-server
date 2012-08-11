@@ -75,32 +75,32 @@ post '/send' do
   puts "params: " + params.inspect
 
   # Notify other people
-  @location = Location.first(:token_id => params[:tokenID])
-  if @location.nil?
-    #Create
-    @location = Location.create(
-      :latitude       => params[:latitude],
-      :longitude       => params[:longitude],
-      :token_id       => params[:tokenID],
-      :created_at => Time.now,
-      :updated_at => Time.now
-    )
-  else
-    #Update
-    @location.latitude = params[:latitude]
-    @location.longitude = params[:longitude]
-    @location.updated_at = Time.now
-  end 
-  @location.save
-
-  # Now find all nearyby peeps and shout out to them
-  expiry = Time.now - 7200
-  @peeps = repository(:default).adapter.select("select token_id from ( select ( 6371 * acos( cos( radians(#{params[:latitude]}) ) * cos( radians( a.latitude ) ) * cos( radians( a.longitude ) - radians(#{params[:longitude]}) ) + sin( radians(#{params[:latitude]}) ) * sin( radians( a.latitude ) ) ) ) as distance, a.* from locations a ) as dt where distance < 0.2 and created_at > '#{expiry.strftime('%Y-%m-%d %H:%M:%S')}' and token_id!='#{params[:tokenID]}' order by created_at desc")
-
-  puts "Number of peeps to push to #{@peeps.length}"
-
-
-
-  CloudMessageClient::sendMessage(@peeps, params[:message])
+  # @location = Location.first(:token_id => params[:tokenID])
+  #   if @location.nil?
+  #     #Create
+  #     @location = Location.create(
+  #       :latitude       => params[:latitude],
+  #       :longitude       => params[:longitude],
+  #       :token_id       => params[:tokenID],
+  #       :created_at => Time.now,
+  #       :updated_at => Time.now
+  #     )
+  #   else
+  #     #Update
+  #     @location.latitude = params[:latitude]
+  #     @location.longitude = params[:longitude]
+  #     @location.updated_at = Time.now
+  #   end 
+  #   @location.save
+  # 
+  #   # Now find all nearyby peeps and shout out to them
+  #   expiry = Time.now - 7200
+  #   @peeps = repository(:default).adapter.select("select token_id from ( select ( 6371 * acos( cos( radians(#{params[:latitude]}) ) * cos( radians( a.latitude ) ) * cos( radians( a.longitude ) - radians(#{params[:longitude]}) ) + sin( radians(#{params[:latitude]}) ) * sin( radians( a.latitude ) ) ) ) as distance, a.* from locations a ) as dt where distance < 0.2 and created_at > '#{expiry.strftime('%Y-%m-%d %H:%M:%S')}' and token_id!='#{params[:tokenID]}' order by created_at desc")
+  # 
+  #   puts "Number of peeps to push to #{@peeps.length}"
+  # 
+  # 
+  # 
+  #   CloudMessageClient::sendMessage(@peeps, params[:message])
 
 end

@@ -26,23 +26,23 @@ class Message
   property :longitude, Float
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :token_id, String, :length => 250
+  #property :token_id, String, :length => 250
 end
 
-class Location
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :token_id, String, :length => 250
-  property :accuracy, String
-  property :latitude, Float
-  property :longitude, Float
-  property :created_at, DateTime
-  property :updated_at, DateTime
-end
+# class Location
+#   include DataMapper::Resource
+# 
+#   property :id, Serial
+#   property :token_id, String, :length => 250
+#   property :accuracy, String
+#   property :latitude, Float
+#   property :longitude, Float
+#   property :created_at, DateTime
+#   property :updated_at, DateTime
+# end
 
 DataMapper.finalize
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
 
 get '/messages/:latitude/:longitude' do
   puts "message called"

@@ -3,7 +3,6 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 require 'data_mapper'
 require 'json'
-require 'dm-migrations'
 
 #require_relative 'cloud_message_client.rb'
 

@@ -3,7 +3,7 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 require 'data_mapper'
 require 'json'
-require_relative 'cloud_message_client.rb'
+#require_relative 'cloud_message_client.rb'
 
 configure :development do
   enable :logging, :dump_errors, :raise_errors

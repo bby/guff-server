@@ -42,7 +42,7 @@ class Location
 end
 
 DataMapper.finalize
-DataMapper.auto_upgrade!
+DataMapper.auto_migrate!
 
 get '/messages/:latitude/:longitude' do
   puts "message called"

@@ -74,4 +74,5 @@ DEPENDENCIES
   data_mapper
   dm-postgres-adapter
   httpclient
+  json
   sinatra

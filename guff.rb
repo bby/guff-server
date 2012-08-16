@@ -104,3 +104,14 @@ post '/send' do
   CloudMessageClient::sendMessage(@peeps, params[:message])
 
 end
+
+get '/showLocs' do
+
+  @locs = Location.all
+  
+  @locs.each do |l|
+    puts "ASDSDA #{l.token_id}"
+  end
+  "HELLO"
+   erb :showLocs
+end 

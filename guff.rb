@@ -95,7 +95,7 @@ post '/send' do
 
   # Now find all nearyby peeps and shout out to them
   expiry = Time.now - 7200
-  @peeps = repository(:default).adapter.select("select token_id from ( select ( 6371 * acos( cos( radians(#{params[:latitude]}) ) * cos( radians( a.latitude ) ) * cos( radians( a.longitude ) - radians(#{params[:longitude]}) ) + sin( radians(#{params[:latitude]}) ) * sin( radians( a.latitude ) ) ) ) as distance, a.* from locations a ) as dt where distance < 0.2 and created_at > '#{expiry.strftime('%Y-%m-%d %H:%M:%S')}' and token_id!='#{params[:tokenID]}' order by created_at desc")
+  @peeps = repository(:default).adapter.select("select token_id from ( select ( 6371 * acos( cos( radians(#{params[:latitude]}) ) * cos( radians( a.latitude ) ) * cos( radians( a.longitude ) - radians(#{params[:longitude]}) ) + sin( radians(#{params[:latitude]}) ) * sin( radians( a.latitude ) ) ) ) as distance, a.* from locations a ) as dt where distance < 0.2 and updated_at > '#{expiry.strftime('%Y-%m-%d %H:%M:%S')}' and token_id!='#{params[:tokenID]}' order by updated_at desc")
 
   puts "Number of peeps to push to #{@peeps.length}"
 
@@ -104,3 +104,14 @@ post '/send' do
   CloudMessageClient::sendMessage(@peeps, params[:message])
 
 end
+
+get '/showLocs' do
+
+  @locs = Location.all
+  
+  @locs.each do |l|
+    puts "ASDSDA #{l.token_id}"
+  end
+  "HELLO"
+   erb :showLocs
+end 

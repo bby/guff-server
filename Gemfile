@@ -1,7 +1,6 @@
 source :rubygems
 
 gem 'sinatra'
-gem 'thin'
 gem 'data_mapper'
 gem 'httpclient'
 gem 'json'
